@@ -47,7 +47,7 @@ def main(stdscr):
             [3,5,7]
         ]
         for win in wins:
-            if cells[win[0]] == None or cells[win[1]] == None or cells[win[2]] == None:
+            if None in [cells[win[0]], cells[win[1]], cells[win[2]]]:
                 continue
             if (cells[win[0]] == cells[win[1]] == cells[win[2]]):
                 print(f"{'O' if cells[win[0]] else 'X'} WINS!")
@@ -100,7 +100,7 @@ def main(stdscr):
     
     for region in regions:
         for y in range(region.size.y+1):
-            text = Text("S"*region.size.x, Position(0-1, y-1))
+            text = Text(" "*region.size.x, Position(0-1, y-1))
             text.callback = on_click
             region.add_element(text)
     
