@@ -23,12 +23,15 @@ def main(stdscr):
         ui.draw()
         
     def update_grid():
-        
+
+        colors = [204, 42]
         for cell in cells:
             if cells[cell] is not None:
                 center = regions[cell-1].size.half() + regions[cell-1].start
-                arts[cell-1] =  AsciiArt(states[cells[cell]], mainRegion, center)
+                arts[cell-1] = AsciiArt(states[cells[cell]], mainRegion, center)
                 arts[cell-1].create()
+                for text in arts[cell-1].elements:
+                    text.color = colors[cells[cell]]
             
         check_win()
                 
@@ -49,7 +52,14 @@ def main(stdscr):
             if (cells[win[0]] == cells[win[1]] == cells[win[2]]):
                 print(f"{'O' if cells[win[0]] else 'X'} WINS!")
                 ui.deactivate()
-                
+            
+        for cell in cells:
+            if cells[cell] == None:
+                break
+            if cell == 9:
+                print(f"Draw!")
+                ui.deactivate()
+                    
                 
              
                 
